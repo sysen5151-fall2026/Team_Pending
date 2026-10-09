@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore transparent biodiversity risk scores across Tompkins County, New York." />
+  <title>Biodiversity Risk Map</title>
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">BR</span>
+      <div><h1>Biodiversity Risk Map</h1><p>Tompkins County pilot</p></div>
+    </div>
+    <div class="header-actions">
+      <button id="methodButton" class="button ghost" type="button">Method</button>
+      <button id="exportButton" class="button primary" type="button">Export priority areas</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="control-panel" aria-label="Map controls">
+      <section>
+        <div class="eyebrow">Decision screen</div>
+        <h2>Find areas that need attention</h2>
+        <p class="intro">Risk is calculated as one minus habitat quality using Stanford Natural Capital Project's InVEST framework.</p>
+      </section>
+
+      <section class="metric-grid" aria-label="Summary metrics">
+        <article><span id="areaCount">--</span><small>grid cells</small></article>
+        <article><span id="highCount">--</span><small>high priority</small></article>
+        <article><span id="avgScore">--</span><small>average risk</small></article>
+      </section>
+
+      <section class="controls">
+        <label for="riskFilter">Risk level</label>
+        <select id="riskFilter">
+          <option value="all">All risk levels</option>
+          <option value="very-high">Very high</option>
+          <option value="high">High</option>
+          <option value="moderate">Moderate</option>
+          <option value="low">Low</option>
+        </select>
+
+        <label for="habitatFilter">Dominant habitat</label>
+        <select id="habitatFilter"><option value="all">All habitats</option></select>
+
+        <div class="range-label"><label for="threshold">Priority threshold</label><output id="thresholdValue">0.65</output></div>
+        <input id="threshold" type="range" min="0" max="1" step="0.05" value="0.65" />
+      </section>
+
+      <section class="legend" aria-label="Risk legend">
+        <h3>Risk score</h3>
+        <div><i style="--c:#9f1d20"></i>Very high <span>0.75–1.00</span></div>
+        <div><i style="--c:#e06b35"></i>High <span>0.50–0.74</span></div>
+        <div><i style="--c:#e8bd55"></i>Moderate <span>0.25–0.49</span></div>
+        <div><i style="--c:#4a9470"></i>Low <span>0.00–0.24</span></div>
+      </section>
+
+      <section class="source-note">
+        <strong>Prototype dataset</strong>
+        <p>The included cells demonstrate the InVEST equations. Run the supplied Python pipeline to replace them with GBIF, Census, PAD-US, NLCD, and OpenStreetMap-derived results.</p>
+      </section>
+    </aside>
+
+    <section class="map-shell">
+      <div id="map" role="application" aria-label="Interactive biodiversity risk map of Tompkins County"></div>
+      <div class="map-status" id="mapStatus" role="status">Loading risk cells…</div>
+      <aside id="detailPanel" class="detail-panel" aria-live="polite">
+        <button id="closeDetail" class="close" aria-label="Close location details">×</button>
+        <div class="eyebrow">Selected location</div>
+        <h2 id="cellName">Choose a grid cell</h2>
+        <div class="score-row"><span id="cellScore">--</span><div><strong id="cellLevel">No selection</strong><small>overall risk score</small></div></div>
+        <div id="drivers" class="drivers"></div>
+        <div class="detail-note"><strong>Recommended next step</strong><p id="recommendation">Select a colored cell to inspect its risk drivers.</p></div>
+      </aside>
+    </section>
+  </main>
+
+  <dialog id="methodDialog">
+    <form method="dialog">
+      <button class="close" aria-label="Close methodology">×</button>
+      <div class="eyebrow">Transparent scoring</div>
+      <h2>How the score is calculated</h2>
+      <p>The dashboard now uses the InVEST Habitat Quality framework. Threat degradation accounts for relative threat weight, spatial effect, accessibility or protection, and habitat sensitivity.</p>
+      <div class="formula">Q<sub>xj</sub> = H<sub>j</sub> × [1 − D<sub>xj</sub><sup>z</sup> / (D<sub>xj</sub><sup>z</sup> + k<sup>z</sup>)]<br>Risk<sub>xj</sub> = 1 − Q<sub>xj</sub></div>
+      <p><strong>Prototype parameters:</strong> z = 2.5 and k = 0.5. InVEST fixes z at 2.5; k, threat weights, distances, suitability, and sensitivity must be calibrated for the study area.</p>
+      <p><a href="https://storage.googleapis.com/releases.naturalcapitalproject.org/invest-userguide/latest/en/habitat_quality.html" target="_blank" rel="noreferrer">Read the official InVEST Habitat Quality documentation</a></p>
+      <p class="caveat"><strong>Appropriate use:</strong> preliminary screening and prioritization. This tool does not replace field surveys, expert ecological review, or regulatory assessment.</p>
+    </form>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
