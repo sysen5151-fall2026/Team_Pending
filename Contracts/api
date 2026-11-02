@@ -1,1 +1,328 @@
-
+openapi: 3.0.3
+info:
+  title: Biodiversity Risk Map — Habitat Modeling Subsystem API
+  version: 1.0.0
+  description: |
+    Lab Manual Ch 7 contract for C.2.3 Habitat Modeling Subsystem.
+    Each operation is one Level-3 IDEF0 box of F.2.3 Calculate Habitat Quality
+    (Innoslate bio2, diagram F.2.3).  Request bodies are the box's inputs and
+    controls; response bodies are its outputs.  Every internal arrow on the
+    F.2.3 IDEF0 is a schema below:
+      Prepared datasets -> F.2.3.1 -> Model input bundle, Threat-layer inventory
+      Threat-layer inventory + Habitat-model parameters -> F.2.3.2 -> Approved parameter set
+      Model input bundle + Re-run request + Approved parameter set -> F.2.3.3 -> Raw model outputs, Run log
+      Raw model outputs -> F.2.3.4 -> Verified habitat rasters, QA result, Re-run request
+      Verified habitat rasters -> F.2.3.5 -> Habitat-quality and degradation results
+      Run log + QA result -> F.2.3.6 -> Model run record
+    In the prototype these are in-process Python calls (brm/habitat_modeling/*)
+    with a byte-identical JavaScript port (dist/brm-engine.js); the HTTP paths
+    are the contract a deployed service must honour.
+servers:
+  - url: /api/v1
+paths:
+  /habitat-quality/runs:
+    post:
+      operationId: calculateHabitatQuality
+      summary: F.2.3 Calculate Habitat Quality (whole subsystem, batch, off the request path — HMS-2.1.1)
+      x-idef0-function: F.2.3
+      x-mechanism: C.2.3 Habitat Modeling Subsystem
+      x-requirement: [SYS-1.4.3, HMS-1.1.1, HMS-1.1.2, HMS-1.2.2, HMS-1.2.3]
+      x-code: brm/habitat_modeling/__init__.py::calculate_habitat_quality
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prepared_datasets, habitat_model_parameters]
+              properties:
+                prepared_datasets: {$ref: '#/components/schemas/PreparedDatasets'}
+                habitat_model_parameters: {$ref: '#/components/schemas/HabitatModelParameters'}
+      responses:
+        '201':
+          description: Habitat-quality and degradation results + Model run record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitat_quality_and_degradation_results: {$ref: '#/components/schemas/HabitatQualityResults'}
+                  model_run_record: {$ref: '#/components/schemas/ModelRunRecord'}
+        '422': {description: Model run failed the output quality gate after 3 attempts (HMS-2.1.5)}
+  /habitat-quality/model-inputs:
+    post:
+      operationId: assembleModelInputs
+      summary: F.2.3.1 Assemble Model Inputs
+      x-idef0-function: F.2.3.1
+      x-mechanism: C.2.3.1 Model Input Builder
+      x-requirement: [HMS-1.4.1, HMS-1.1.2, HMS-2.1.4]
+      x-code: brm/habitat_modeling/f2_3_1_model_input_builder.py::assemble_model_inputs
+      requestBody:
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/PreparedDatasets'}
+      responses:
+        '200':
+          description: Model input bundle (-> F.2.3.3) and Threat-layer inventory (-> F.2.3.2)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  model_input_bundle: {$ref: '#/components/schemas/ModelInputBundle'}
+                  threat_layer_inventory: {$ref: '#/components/schemas/ThreatLayerInventory'}
+  /habitat-quality/parameter-sets:
+    post:
+      operationId: configureThreatAndSensitivityParameters
+      summary: F.2.3.2 Configure Threat and Sensitivity Parameters (IT Development Team only — HMS-2.1.6)
+      x-idef0-function: F.2.3.2
+      x-mechanism: C.2.3.2 Parameter Configuration Manager
+      x-requirement: [HMS-1.4.2, HMS-1.1.1, HMS-2.1.6, HMS-2.3.2]
+      x-code: brm/habitat_modeling/f2_3_2_parameter_configuration_manager.py::configure_threat_and_sensitivity_parameters
+      security: [{itTeamRole: []}]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                threat_layer_inventory: {$ref: '#/components/schemas/ThreatLayerInventory'}
+                habitat_model_parameters: {$ref: '#/components/schemas/HabitatModelParameters'}
+      responses:
+        '201':
+          description: Approved parameter set (control of F.2.3.3)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApprovedParameterSet'}
+        '400': {description: Parameters do not cover the threat-layer inventory}
+  /habitat-quality/executions:
+    post:
+      operationId: executeHabitatQualityModel
+      summary: F.2.3.3 Execute Habitat Quality Model
+      x-idef0-function: F.2.3.3
+      x-mechanism: C.2.3.3 InVEST Habitat Quality Engine
+      x-requirement: [HMS-1.4.3, HMS-2.3.1, HMS-2.1.3]
+      x-code: brm/habitat_modeling/f2_3_3_invest_engine.py::execute_habitat_quality_model
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [model_input_bundle, approved_parameter_set]
+              properties:
+                model_input_bundle: {$ref: '#/components/schemas/ModelInputBundle'}
+                rerun_request: {$ref: '#/components/schemas/RerunRequest'}
+                approved_parameter_set: {$ref: '#/components/schemas/ApprovedParameterSet'}
+      responses:
+        '200':
+          description: Raw model outputs (-> F.2.3.4) and Run log (-> F.2.3.6)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  raw_model_outputs: {$ref: '#/components/schemas/RawModelOutputs'}
+                  run_log: {$ref: '#/components/schemas/RunLog'}
+  /habitat-quality/verifications:
+    post:
+      operationId: verifyModelOutputs
+      summary: F.2.3.4 Verify Model Outputs (quality gate — HMS-2.1.5)
+      x-idef0-function: F.2.3.4
+      x-mechanism: C.2.3.4 Output QA Checker
+      x-requirement: [HMS-1.4.4, HMS-2.1.5, HMS-2.1.4]
+      x-code: brm/habitat_modeling/f2_3_4_output_qa_checker.py::verify_model_outputs
+      requestBody:
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RawModelOutputs'}
+      responses:
+        '200':
+          description: QA PASS -> Verified habitat rasters (-> F.2.3.5) + QA result (-> F.2.3.6)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified_habitat_rasters: {$ref: '#/components/schemas/VerifiedHabitatRasters'}
+                  qa_result: {$ref: '#/components/schemas/QAResult'}
+        '409':
+          description: QA FAIL -> QA result + Re-run request (feedback arrow to F.2.3.3)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  qa_result: {$ref: '#/components/schemas/QAResult'}
+                  rerun_request: {$ref: '#/components/schemas/RerunRequest'}
+  /habitat-quality/classifications:
+    post:
+      operationId: classifyHabitatRisk
+      summary: F.2.3.5 Classify Habitat Risk
+      x-idef0-function: F.2.3.5
+      x-mechanism: C.2.3.5 Risk Classifier
+      x-requirement: [HMS-1.4.5, HMS-1.2.2]
+      x-code: brm/habitat_modeling/f2_3_5_risk_classifier.py::classify_habitat_risk
+      requestBody:
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/VerifiedHabitatRasters'}
+      responses:
+        '200':
+          description: Habitat-quality and degradation results (-> F.2.4, F.2.5)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/HabitatQualityResults'}
+  /habitat-quality/run-records:
+    post:
+      operationId: registerModelRun
+      summary: F.2.3.6 Register Model Run
+      x-idef0-function: F.2.3.6
+      x-mechanism: C.2.3.6 Model Run Registry
+      x-requirement: [HMS-1.4.6, HMS-1.2.3, HMS-2.4.2]
+      x-code: brm/habitat_modeling/f2_3_6_model_run_registry.py::register_model_run
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                run_log: {type: array, items: {$ref: '#/components/schemas/RunLog'}}
+                qa_result: {type: array, items: {$ref: '#/components/schemas/QAResult'}}
+      responses:
+        '201':
+          description: Model run record (-> F.2.6 Explain Results and Limitations)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ModelRunRecord'}
+    get:
+      operationId: getModelRunRecord
+      summary: Read the Model run record used by F.2.6 (HMS-1.2.3)
+      x-idef0-function: F.2.3.6
+      x-requirement: [HMS-1.2.3, SYS-2.4.5]
+      parameters: [{name: run_id, in: query, required: true, schema: {type: string, pattern: '^RUN-[0-9a-f]{8}$'}}]
+      responses:
+        '200':
+          description: Model run record
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ModelRunRecord'}
+components:
+  securitySchemes:
+    itTeamRole: {type: http, scheme: bearer, description: 'Role = C.4 IT Development Team (SYS-2.1.7 / HMS-2.1.6)'}
+  schemas:
+    PreparedDatasets:
+      description: Prepared datasets (output of F.2.2, input of F.2.3 / F.2.3.1)
+      type: object
+      required: [dataset_id, crs, cell_size_m, cells]
+      properties:
+        dataset_id: {type: string, pattern: '^DS-[0-9a-f]{8}$'}
+        crs: {type: string, enum: ['EPSG:26918']}
+        cell_size_m: {type: integer}
+        cells:
+          type: array
+          items:
+            type: object
+            required: [cell_id, land_cover, dist_road_km, dist_urban_km, dist_agriculture_km, protected]
+            properties:
+              cell_id: {type: string}
+              land_cover: {type: string}
+              dist_road_km: {type: number, minimum: 0}
+              dist_urban_km: {type: number, minimum: 0}
+              dist_agriculture_km: {type: number, minimum: 0}
+              protected: {type: boolean}
+              species_count: {type: integer, nullable: true}
+    HabitatModelParameters:
+      description: Habitat-model parameters (control from F.4 IT Development Team; config/habitat_model_parameters.json)
+      type: object
+      required: [invest_version, z, k, threats, habitat_suitability, sensitivity]
+      properties:
+        invest_version: {type: string, pattern: '^\d+\.\d+\.\d+$'}
+        z: {type: number}
+        k: {type: number}
+        threats: {type: object, additionalProperties: {type: object, properties: {weight: {type: number}, max_distance_km: {type: number}, decay: {type: string, enum: [linear, exponential]}}}}
+        habitat_suitability: {type: object, additionalProperties: {type: number, minimum: 0, maximum: 1}}
+        sensitivity: {type: object, additionalProperties: {type: object, additionalProperties: {type: number}}}
+    ModelInputBundle:
+      description: Model input bundle (F.2.3.1 -> F.2.3.3)
+      type: object
+      properties:
+        bundle_id: {type: string, pattern: '^MB-[0-9a-f]{8}$'}
+        dataset_id: {type: string}
+        cells: {type: array, items: {type: object, properties: {cell_id: {type: string}, land_cover: {type: string}, accessibility: {type: number}, threat_distance_km: {type: object, additionalProperties: {type: number}}}}}
+    ThreatLayerInventory:
+      description: Threat-layer inventory (F.2.3.1 -> F.2.3.2)
+      type: object
+      properties:
+        bundle_id: {type: string}
+        threats: {type: array, items: {type: string}}
+        land_cover_classes: {type: array, items: {type: string}}
+        cell_count: {type: integer}
+    ApprovedParameterSet:
+      description: Approved parameter set (F.2.3.2 -> control of F.2.3.3)
+      allOf:
+        - {$ref: '#/components/schemas/HabitatModelParameters'}
+        - type: object
+          properties:
+            parameter_set_id: {type: string, pattern: '^PS-[0-9a-f]{8}$'}
+    RerunRequest:
+      description: Re-run request (F.2.3.4 -> F.2.3.3 feedback)
+      type: object
+      nullable: true
+      properties: {attempt: {type: integer}, reason: {type: string}}
+    RawModelOutputs:
+      description: Raw model outputs (F.2.3.3 -> F.2.3.4)
+      type: object
+      properties:
+        bundle_id: {type: string}
+        parameter_set_id: {type: string}
+        attempt: {type: integer}
+        cells: {type: array, items: {$ref: '#/components/schemas/CellResult'}}
+    RunLog:
+      description: Run log (F.2.3.3 -> F.2.3.6)
+      type: object
+      properties: {engine: {type: string}, dataset_id: {type: string}, bundle_id: {type: string}, parameter_set_id: {type: string}, attempt: {type: integer}, rerun_reason: {type: string, nullable: true}, cells_processed: {type: integer}, duration_ms: {type: number}}
+    QAResult:
+      description: QA result (F.2.3.4 -> F.2.3.6)
+      type: object
+      properties: {status: {type: string, enum: [PASS, FAIL]}, checked_cells: {type: integer}, failures: {type: array, items: {type: object}}, attempt: {type: integer}}
+    VerifiedHabitatRasters:
+      description: Verified habitat rasters (F.2.3.4 -> F.2.3.5)
+      type: object
+      properties: {bundle_id: {type: string}, parameter_set_id: {type: string}, cells: {type: array, items: {$ref: '#/components/schemas/CellResult'}}}
+    CellResult:
+      type: object
+      properties:
+        cell_id: {type: string}
+        land_cover: {type: string}
+        habitat_suitability: {type: number}
+        accessibility: {type: number}
+        threat_impact: {type: object, additionalProperties: {type: number}}
+        degradation: {type: number, minimum: 0, maximum: 1}
+        habitat_quality: {type: number, minimum: 0, maximum: 1}
+    HabitatQualityResults:
+      description: Habitat-quality and degradation results (F.2.3.5 -> F.2.3 boundary -> F.2.4, F.2.5)
+      type: object
+      properties:
+        run_id: {type: string}
+        parameter_set_id: {type: string}
+        class_counts: {type: object, additionalProperties: {type: integer}}
+        cells:
+          type: array
+          items:
+            allOf:
+              - {$ref: '#/components/schemas/CellResult'}
+              - type: object
+                properties: {risk_score: {type: number}, risk_class: {type: string, enum: [Very high, High, Moderate, Low, Very low]}}
+    ModelRunRecord:
+      description: Model run record (F.2.3.6 -> F.2.3 boundary -> F.2.6)
+      type: object
+      required: [run_id, dataset_id, parameter_set_id, engine, final_qa]
+      properties:
+        run_id: {type: string, pattern: '^RUN-[0-9a-f]{8}$'}
+        dataset_id: {type: string}
+        bundle_id: {type: string}
+        parameter_set_id: {type: string}
+        engine: {type: string}
+        attempts: {type: integer}
+        final_qa: {type: string, enum: [PASS, FAIL]}
+        history: {type: array, items: {type: object}}
