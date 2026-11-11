@@ -1,0 +1,681 @@
+{
+ "source_id": "OSM-ROADS",
+ "title": "OpenStreetMap roads, distance raster",
+ "crs": "EPSG:26918",
+ "retrieved": "2026-10-15",
+ "license": "ODbL",
+ "records": [
+  {
+   "cell_id": "R01-C01",
+   "distance_km": 2.142
+  },
+  {
+   "cell_id": "R01-C02",
+   "distance_km": 3.923
+  },
+  {
+   "cell_id": "R01-C03",
+   "distance_km": 5.706
+  },
+  {
+   "cell_id": "R01-C04",
+   "distance_km": 6.97
+  },
+  {
+   "cell_id": "R01-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R01-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R01-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R01-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R01-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R01-C10",
+   "distance_km": 9.196
+  },
+  {
+   "cell_id": "R01-C11",
+   "distance_km": 11.89
+  },
+  {
+   "cell_id": "R01-C12",
+   "distance_km": 14.584
+  },
+  {
+   "cell_id": "R01-C13",
+   "distance_km": 17.279
+  },
+  {
+   "cell_id": "R01-C14",
+   "distance_km": 19.973
+  },
+  {
+   "cell_id": "R02-C01",
+   "distance_km": 0.357
+  },
+  {
+   "cell_id": "R02-C02",
+   "distance_km": 1.427
+  },
+  {
+   "cell_id": "R02-C03",
+   "distance_km": 3.21
+  },
+  {
+   "cell_id": "R02-C04",
+   "distance_km": 4.993
+  },
+  {
+   "cell_id": "R02-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R02-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R02-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R02-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R02-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R02-C10",
+   "distance_km": 9.196
+  },
+  {
+   "cell_id": "R02-C11",
+   "distance_km": 11.89
+  },
+  {
+   "cell_id": "R02-C12",
+   "distance_km": 14.584
+  },
+  {
+   "cell_id": "R02-C13",
+   "distance_km": 17.279
+  },
+  {
+   "cell_id": "R02-C14",
+   "distance_km": 19.973
+  },
+  {
+   "cell_id": "R03-C01",
+   "distance_km": 2.853
+  },
+  {
+   "cell_id": "R03-C02",
+   "distance_km": 1.07
+  },
+  {
+   "cell_id": "R03-C03",
+   "distance_km": 0.713
+  },
+  {
+   "cell_id": "R03-C04",
+   "distance_km": 2.496
+  },
+  {
+   "cell_id": "R03-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R03-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R03-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R03-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R03-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R03-C10",
+   "distance_km": 9.196
+  },
+  {
+   "cell_id": "R03-C11",
+   "distance_km": 11.89
+  },
+  {
+   "cell_id": "R03-C12",
+   "distance_km": 14.584
+  },
+  {
+   "cell_id": "R03-C13",
+   "distance_km": 17.279
+  },
+  {
+   "cell_id": "R03-C14",
+   "distance_km": 17.254
+  },
+  {
+   "cell_id": "R04-C01",
+   "distance_km": 5.349
+  },
+  {
+   "cell_id": "R04-C02",
+   "distance_km": 3.566
+  },
+  {
+   "cell_id": "R04-C03",
+   "distance_km": 1.783
+  },
+  {
+   "cell_id": "R04-C04",
+   "distance_km": 0.0
+  },
+  {
+   "cell_id": "R04-C05",
+   "distance_km": 1.783
+  },
+  {
+   "cell_id": "R04-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R04-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R04-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R04-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R04-C10",
+   "distance_km": 9.196
+  },
+  {
+   "cell_id": "R04-C11",
+   "distance_km": 11.89
+  },
+  {
+   "cell_id": "R04-C12",
+   "distance_km": 14.247
+  },
+  {
+   "cell_id": "R04-C13",
+   "distance_km": 14.088
+  },
+  {
+   "cell_id": "R04-C14",
+   "distance_km": 13.93
+  },
+  {
+   "cell_id": "R05-C01",
+   "distance_km": 7.846
+  },
+  {
+   "cell_id": "R05-C02",
+   "distance_km": 6.063
+  },
+  {
+   "cell_id": "R05-C03",
+   "distance_km": 4.28
+  },
+  {
+   "cell_id": "R05-C04",
+   "distance_km": 2.496
+  },
+  {
+   "cell_id": "R05-C05",
+   "distance_km": 0.713
+  },
+  {
+   "cell_id": "R05-C06",
+   "distance_km": 1.07
+  },
+  {
+   "cell_id": "R05-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R05-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R05-C09",
+   "distance_km": 6.419
+  },
+  {
+   "cell_id": "R05-C10",
+   "distance_km": 8.202
+  },
+  {
+   "cell_id": "R05-C11",
+   "distance_km": 9.986
+  },
+  {
+   "cell_id": "R05-C12",
+   "distance_km": 10.923
+  },
+  {
+   "cell_id": "R05-C13",
+   "distance_km": 10.764
+  },
+  {
+   "cell_id": "R05-C14",
+   "distance_km": 10.606
+  },
+  {
+   "cell_id": "R06-C01",
+   "distance_km": 9.34
+  },
+  {
+   "cell_id": "R06-C02",
+   "distance_km": 8.559
+  },
+  {
+   "cell_id": "R06-C03",
+   "distance_km": 6.776
+  },
+  {
+   "cell_id": "R06-C04",
+   "distance_km": 4.993
+  },
+  {
+   "cell_id": "R06-C05",
+   "distance_km": 3.21
+  },
+  {
+   "cell_id": "R06-C06",
+   "distance_km": 1.427
+  },
+  {
+   "cell_id": "R06-C07",
+   "distance_km": 0.357
+  },
+  {
+   "cell_id": "R06-C08",
+   "distance_km": 2.14
+  },
+  {
+   "cell_id": "R06-C09",
+   "distance_km": 3.923
+  },
+  {
+   "cell_id": "R06-C10",
+   "distance_km": 5.706
+  },
+  {
+   "cell_id": "R06-C11",
+   "distance_km": 7.489
+  },
+  {
+   "cell_id": "R06-C12",
+   "distance_km": 7.598
+  },
+  {
+   "cell_id": "R06-C13",
+   "distance_km": 7.44
+  },
+  {
+   "cell_id": "R06-C14",
+   "distance_km": 7.282
+  },
+  {
+   "cell_id": "R07-C01",
+   "distance_km": 6.015
+  },
+  {
+   "cell_id": "R07-C02",
+   "distance_km": 5.857
+  },
+  {
+   "cell_id": "R07-C03",
+   "distance_km": 5.699
+  },
+  {
+   "cell_id": "R07-C04",
+   "distance_km": 5.54
+  },
+  {
+   "cell_id": "R07-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R07-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R07-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R07-C08",
+   "distance_km": 0.357
+  },
+  {
+   "cell_id": "R07-C09",
+   "distance_km": 1.427
+  },
+  {
+   "cell_id": "R07-C10",
+   "distance_km": 3.21
+  },
+  {
+   "cell_id": "R07-C11",
+   "distance_km": 4.432
+  },
+  {
+   "cell_id": "R07-C12",
+   "distance_km": 4.274
+  },
+  {
+   "cell_id": "R07-C13",
+   "distance_km": 4.116
+  },
+  {
+   "cell_id": "R07-C14",
+   "distance_km": 3.957
+  },
+  {
+   "cell_id": "R08-C01",
+   "distance_km": 2.691
+  },
+  {
+   "cell_id": "R08-C02",
+   "distance_km": 2.533
+  },
+  {
+   "cell_id": "R08-C03",
+   "distance_km": 2.374
+  },
+  {
+   "cell_id": "R08-C04",
+   "distance_km": 2.216
+  },
+  {
+   "cell_id": "R08-C05",
+   "distance_km": 2.058
+  },
+  {
+   "cell_id": "R08-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R08-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R08-C08",
+   "distance_km": 1.583
+  },
+  {
+   "cell_id": "R08-C09",
+   "distance_km": 1.07
+  },
+  {
+   "cell_id": "R08-C10",
+   "distance_km": 0.713
+  },
+  {
+   "cell_id": "R08-C11",
+   "distance_km": 1.108
+  },
+  {
+   "cell_id": "R08-C12",
+   "distance_km": 0.95
+  },
+  {
+   "cell_id": "R08-C13",
+   "distance_km": 0.791
+  },
+  {
+   "cell_id": "R08-C14",
+   "distance_km": 0.633
+  },
+  {
+   "cell_id": "R09-C01",
+   "distance_km": 0.633
+  },
+  {
+   "cell_id": "R09-C02",
+   "distance_km": 0.791
+  },
+  {
+   "cell_id": "R09-C03",
+   "distance_km": 0.95
+  },
+  {
+   "cell_id": "R09-C04",
+   "distance_km": 1.108
+  },
+  {
+   "cell_id": "R09-C05",
+   "distance_km": 1.266
+  },
+  {
+   "cell_id": "R09-C06",
+   "distance_km": 1.425
+  },
+  {
+   "cell_id": "R09-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R09-C08",
+   "distance_km": 1.741
+  },
+  {
+   "cell_id": "R09-C09",
+   "distance_km": 1.9
+  },
+  {
+   "cell_id": "R09-C10",
+   "distance_km": 1.783
+  },
+  {
+   "cell_id": "R09-C11",
+   "distance_km": 0.0
+  },
+  {
+   "cell_id": "R09-C12",
+   "distance_km": 1.783
+  },
+  {
+   "cell_id": "R09-C13",
+   "distance_km": 2.533
+  },
+  {
+   "cell_id": "R09-C14",
+   "distance_km": 2.691
+  },
+  {
+   "cell_id": "R10-C01",
+   "distance_km": 3.957
+  },
+  {
+   "cell_id": "R10-C02",
+   "distance_km": 4.116
+  },
+  {
+   "cell_id": "R10-C03",
+   "distance_km": 4.274
+  },
+  {
+   "cell_id": "R10-C04",
+   "distance_km": 4.432
+  },
+  {
+   "cell_id": "R10-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R10-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R10-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R10-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R10-C09",
+   "distance_km": 5.224
+  },
+  {
+   "cell_id": "R10-C10",
+   "distance_km": 4.28
+  },
+  {
+   "cell_id": "R10-C11",
+   "distance_km": 2.496
+  },
+  {
+   "cell_id": "R10-C12",
+   "distance_km": 0.713
+  },
+  {
+   "cell_id": "R10-C13",
+   "distance_km": 1.07
+  },
+  {
+   "cell_id": "R10-C14",
+   "distance_km": 2.853
+  },
+  {
+   "cell_id": "R11-C01",
+   "distance_km": 7.282
+  },
+  {
+   "cell_id": "R11-C02",
+   "distance_km": 7.44
+  },
+  {
+   "cell_id": "R11-C03",
+   "distance_km": 7.598
+  },
+  {
+   "cell_id": "R11-C04",
+   "distance_km": 6.97
+  },
+  {
+   "cell_id": "R11-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R11-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R11-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R11-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R11-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R11-C10",
+   "distance_km": 6.776
+  },
+  {
+   "cell_id": "R11-C11",
+   "distance_km": 4.993
+  },
+  {
+   "cell_id": "R11-C12",
+   "distance_km": 3.21
+  },
+  {
+   "cell_id": "R11-C13",
+   "distance_km": 1.427
+  },
+  {
+   "cell_id": "R11-C14",
+   "distance_km": 0.357
+  },
+  {
+   "cell_id": "R12-C01",
+   "distance_km": 10.606
+  },
+  {
+   "cell_id": "R12-C02",
+   "distance_km": 10.764
+  },
+  {
+   "cell_id": "R12-C03",
+   "distance_km": 9.664
+  },
+  {
+   "cell_id": "R12-C04",
+   "distance_km": 6.97
+  },
+  {
+   "cell_id": "R12-C05",
+   "distance_km": 4.276
+  },
+  {
+   "cell_id": "R12-C06",
+   "distance_km": 1.581
+  },
+  {
+   "cell_id": "R12-C07",
+   "distance_km": 1.113
+  },
+  {
+   "cell_id": "R12-C08",
+   "distance_km": 3.807
+  },
+  {
+   "cell_id": "R12-C09",
+   "distance_km": 6.501
+  },
+  {
+   "cell_id": "R12-C10",
+   "distance_km": 9.196
+  },
+  {
+   "cell_id": "R12-C11",
+   "distance_km": 7.489
+  },
+  {
+   "cell_id": "R12-C12",
+   "distance_km": 5.706
+  },
+  {
+   "cell_id": "R12-C13",
+   "distance_km": 3.923
+  },
+  {
+   "cell_id": "R12-C14",
+   "distance_km": 2.142
+  }
+ ]
+}

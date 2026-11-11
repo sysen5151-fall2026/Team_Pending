@@ -1,3 +1,5 @@
+import pytest
+pytest.importorskip("geopandas")
 import pandas as pd
 from scripts.build_risk_grid import normalize
 

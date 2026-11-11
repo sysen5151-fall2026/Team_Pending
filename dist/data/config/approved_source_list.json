@@ -1,0 +1,13 @@
+{
+  "_idef0": "Control for F.2.1 Acquire Environmental Data. Owner: F.3 Review Environmental Screening Evidence (C.3 Government Agencies).",
+  "version": "ASL-2026.10",
+  "approved_sources": [
+    "USGS-NLCD-LANDCOVER",
+    "OSM-ROADS",
+    "NLCD-DEVELOPED",
+    "NLCD-CULTIVATED",
+    "USGS-PADUS",
+    "GBIF-OCCURRENCES",
+    "TIGER-BOUNDARY"
+  ]
+}

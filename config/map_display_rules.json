@@ -1,0 +1,13 @@
+{
+  "_idef0": "Control for F.2.5 Display Geographic Results. Owner: F.4 Maintain Biodiversity Risk Map (C.4 IT Development Team).",
+  "version": "MDR-2026.10",
+  "colors": {
+    "Very high": "#A8322D",
+    "High": "#E07A3F",
+    "Moderate": "#E7C55C",
+    "Low": "#8DB580",
+    "Very low": "#2F6B4F"
+  },
+  "fill_opacity": 0.82,
+  "attribution": "Demo data derived from USGS NLCD, OpenStreetMap, USGS PAD-US, GBIF, U.S. Census TIGER (prototype values)"
+}

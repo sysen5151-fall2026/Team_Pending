@@ -1,0 +1,9 @@
+{
+  "_idef0": "Control for F.2.2 Validate and Prepare Data. Owner: F.4 Maintain Biodiversity Risk Map (C.4 IT Development Team).",
+  "version": "DQC-2026.10",
+  "target_crs": "EPSG:26918",
+  "cell_size_m": 1000,
+  "value_range": [0.0, 1.0],
+  "max_missing_fraction": 0.01,
+  "min_occurrence_records": 10
+}

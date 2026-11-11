@@ -1,0 +1,75 @@
+{
+  "_idef0": "Control for F.2.3 Calculate Habitat Quality (enters at F.2.3.2). Owner: F.4 Maintain Biodiversity Risk Map (C.4 IT Development Team). Changes require a release approval (HMS 2.1.6, 2.3.2).",
+  "version": "HMP-2026.10",
+  "invest_model": "InVEST Habitat Quality",
+  "invest_version": "3.14.2",
+  "z": 2.5,
+  "k": 0.3,
+  "threats": {
+    "road": {
+      "weight": 0.4,
+      "max_distance_km": 3.0,
+      "decay": "linear"
+    },
+    "urban": {
+      "weight": 0.4,
+      "max_distance_km": 8.0,
+      "decay": "exponential"
+    },
+    "agriculture": {
+      "weight": 0.2,
+      "max_distance_km": 2.0,
+      "decay": "linear"
+    }
+  },
+  "habitat_suitability": {
+    "Forest": 1.0,
+    "Wetland": 1.0,
+    "Mixed habitat": 0.7,
+    "Agriculture": 0.35
+  },
+  "sensitivity": {
+    "Forest": {
+      "road": 0.7,
+      "urban": 0.9,
+      "agriculture": 0.6
+    },
+    "Wetland": {
+      "road": 0.8,
+      "urban": 1.0,
+      "agriculture": 0.9
+    },
+    "Mixed habitat": {
+      "road": 0.6,
+      "urban": 0.7,
+      "agriculture": 0.5
+    },
+    "Agriculture": {
+      "road": 0.3,
+      "urban": 0.5,
+      "agriculture": 0.1
+    }
+  },
+  "risk_classes": [
+    {
+      "name": "Very high",
+      "min": 0.8
+    },
+    {
+      "name": "High",
+      "min": 0.6
+    },
+    {
+      "name": "Moderate",
+      "min": 0.4
+    },
+    {
+      "name": "Low",
+      "min": 0.2
+    },
+    {
+      "name": "Very low",
+      "min": 0.0
+    }
+  ]
+}

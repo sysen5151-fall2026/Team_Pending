@@ -1,0 +1,11 @@
+{
+  "_idef0": "Control for F.2.4 Summarize Site Conditions. Owner: F.5 Screen Proposed Development Sites (C.5 Local Planner).",
+  "version": "SSR-2026.10",
+  "review_threshold": 0.6,
+  "recommendations": [
+    {"min": 0.8, "text": "Prioritize field verification and contact the land manager before any planning decision."},
+    {"min": 0.6, "text": "Recommend a targeted habitat survey and further environmental review."},
+    {"min": 0.4, "text": "Review recent land-cover change; monitor the site."},
+    {"min": 0.0, "text": "No further screening action indicated; routine monitoring."}
+  ]
+}

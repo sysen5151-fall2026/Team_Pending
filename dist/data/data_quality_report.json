@@ -1,0 +1,173 @@
+{
+ "data_quality_report": {
+  "criteria_version": "DQC-2026.10",
+  "target_crs": "EPSG:26918",
+  "issues": [
+   {
+    "source_id": "TIGER-BOUNDARY",
+    "issue": "grid geometry kept in EPSG:4326 for web display; analysis values aligned to EPSG:26918 1000 m cells"
+   }
+  ],
+  "data_gap_cells": [
+   "R01-C14",
+   "R07-C13",
+   "R12-C04"
+  ],
+  "data_gap_warning": "3 cell(s) have no species-occurrence records; biodiversity value may be under-estimated there.",
+  "rejected_sources": [
+   {
+    "source_id": "SCRAPED-BLOG-LAYER",
+    "reason": "not on approved source list"
+   }
+  ],
+  "sources": [
+   {
+    "source_id": "GBIF-OCCURRENCES",
+    "title": "GBIF species occurrence counts",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "CC-BY",
+    "records": 165,
+    "checksum": "2b3e7e25098f"
+   },
+   {
+    "source_id": "NLCD-CULTIVATED",
+    "title": "NLCD cultivated classes, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "b5a3856f47a6"
+   },
+   {
+    "source_id": "NLCD-DEVELOPED",
+    "title": "NLCD developed classes, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "a6620d375a7d"
+   },
+   {
+    "source_id": "OSM-ROADS",
+    "title": "OpenStreetMap roads, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "ODbL",
+    "records": 168,
+    "checksum": "07f94c841a8f"
+   },
+   {
+    "source_id": "TIGER-BOUNDARY",
+    "title": "U.S. Census TIGER county boundary, gridded",
+    "crs": "EPSG:4326",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "c5a4053de905"
+   },
+   {
+    "source_id": "USGS-NLCD-LANDCOVER",
+    "title": "NLCD 2021 land cover, reclassified",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "d7efad2fe092"
+   },
+   {
+    "source_id": "USGS-PADUS",
+    "title": "Protected Areas Database of the U.S.",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "51180d4ae8d0"
+   }
+  ]
+ },
+ "coverage_validation_result": {
+  "status": "COMPLETE",
+  "grid_cells": 168,
+  "prepared_cells": 168,
+  "missing_fraction": 0.0,
+  "incomplete_cells": []
+ },
+ "acquired_metadata": {
+  "planning_area": "Tompkins County, NY",
+  "metadata": [
+   {
+    "source_id": "GBIF-OCCURRENCES",
+    "title": "GBIF species occurrence counts",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "CC-BY",
+    "records": 165,
+    "checksum": "2b3e7e25098f"
+   },
+   {
+    "source_id": "NLCD-CULTIVATED",
+    "title": "NLCD cultivated classes, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "b5a3856f47a6"
+   },
+   {
+    "source_id": "NLCD-DEVELOPED",
+    "title": "NLCD developed classes, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "a6620d375a7d"
+   },
+   {
+    "source_id": "OSM-ROADS",
+    "title": "OpenStreetMap roads, distance raster",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "ODbL",
+    "records": 168,
+    "checksum": "07f94c841a8f"
+   },
+   {
+    "source_id": "TIGER-BOUNDARY",
+    "title": "U.S. Census TIGER county boundary, gridded",
+    "crs": "EPSG:4326",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "c5a4053de905"
+   },
+   {
+    "source_id": "USGS-NLCD-LANDCOVER",
+    "title": "NLCD 2021 land cover, reclassified",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "d7efad2fe092"
+   },
+   {
+    "source_id": "USGS-PADUS",
+    "title": "Protected Areas Database of the U.S.",
+    "crs": "EPSG:26918",
+    "retrieved": "2026-10-15",
+    "license": "public",
+    "records": 168,
+    "checksum": "51180d4ae8d0"
+   }
+  ],
+  "rejected_sources": [
+   {
+    "source_id": "SCRAPED-BLOG-LAYER",
+    "reason": "not on approved source list"
+   }
+  ],
+  "missing_sources": [],
+  "approved_source_list_version": "ASL-2026.10"
+ },
+ "dataset_identifier": "DS-ca568a93"
+}
