@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Biodiversity Risk Map — F.2 Assess Spatial Biodiversity Conditions</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true"></div>
+    <div>
+      <h1>Biodiversity Risk Map</h1>
+      <p>F.2 Assess Spatial Biodiversity Conditions · mechanism C.2 · Tompkins County, NY (prototype)</p>
+    </div>
+  </div>
+  <nav id="nav">
+    <a href="#/map" data-route="map"><b>Risk map</b><small>view risk · F.2.5</small></a>
+    <a href="#/site" data-route="site"><b>Screen a site</b><small>screen site · F.2.4→F.2.7</small></a>
+    <a href="#/model/F.2.3" data-route="model"><b>IDEF0 trace</b><small>maintain model · L1 L2 L3</small></a>
+    <a href="#/data" data-route="data"><b>Data &amp; QA</b><small>F.2.1 · F.2.2</small></a>
+  </nav>
+  <div class="runbadge" id="runBadge" title="Model run record (F.2.3.6) of the results currently shown">—</div>
+</header>
+
+<main>
+  <!-- ============ MAP + SITE (shared map) ============ -->
+  <section id="view-map" class="view mapview">
+    <div id="map"></div>
+    <div id="mapNotice" class="notice" hidden></div>
+    <aside class="side" id="side-map">
+      <div class="card">
+        <div class="fhead"><span class="fid">F.2.5</span> Display Geographic Results <span class="mech">C.2.5 Web Map Subsystem</span></div>
+        <div class="seg" id="layerToggle">
+          <button data-layer="risk" class="on">Displayed risk map</button>
+          <button data-layer="hq">Habitat-quality map</button>
+        </div>
+        <div id="legend" class="legend"></div>
+        <div class="counts" id="classCounts"></div>
+        <label class="row">Habitat <select id="habitatFilter"><option value="all">All</option></select></label>
+        <p class="hint">Hatched outline = data gap (no species records, SYS-2.1.5). Click a cell for its factors.</p>
+      </div>
+      <div class="card" id="cellCard" hidden>
+        <div class="fhead"><span class="fid">F.2.3</span> Cell result <span class="mech" id="cellRun"></span></div>
+        <h3 id="cellTitle"></h3>
+        <div class="bigscore"><span id="cellScore"></span><span id="cellClass"></span></div>
+        <div id="cellBars"></div>
+        <button class="btn ghost" id="addToSite">Add to site selection →</button>
+      </div>
+    </aside>
+    <aside class="side" id="side-site">
+      <div class="card">
+        <div class="fhead"><span class="fid ctl">Control</span> Site selection <span class="mech">from F.5 Local Planner</span></div>
+        <input id="siteName" value="Proposed Route 13 commercial site" aria-label="Site name">
+        <p class="hint">Click cells on the map to add or remove them.</p>
+        <div id="siteCells" class="chips"></div>
+        <div class="btnrow"><button class="btn ghost" id="clearSite">Clear</button><button class="btn ghost" id="demoSite">Load demo site</button></div>
+      </div>
+      <div class="card" id="summaryCard">
+        <div class="fhead"><span class="fid">F.2.4</span> Summarize Site Conditions <span class="mech">C.2.4 Spatial Analysis</span></div>
+        <div id="summary"></div>
+      </div>
+      <div class="card" id="explainCard">
+        <div class="fhead"><span class="fid">F.2.6</span> Explain Results and Limitations <span class="mech">C.2.6 Explanation</span></div>
+        <div id="explain"></div>
+      </div>
+      <div class="card">
+        <div class="fhead"><span class="fid">F.2.7</span> Export Screening Reports <span class="mech">C.2.7 Report Generation</span></div>
+        <div class="btnrow"><button class="btn" id="exportMd">Screening report (.md)</button><button class="btn" id="exportCsv">Cell table (.csv)</button></div>
+        <button class="btn ghost" id="previewReport">Preview report</button>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ============ IDEF0 TRACE ============ -->
+  <section id="view-model" class="view modelview">
+    <div class="lvl">
+      <div class="lvlhead"><span class="tag">Level 1</span> Metafunction IDEF0 — who supplies F.2 and who uses its outputs</div>
+      <div id="level1" class="level1"></div>
+    </div>
+    <div class="lvl">
+      <div class="lvlhead"><span class="tag">Level 2</span> F.2 Assess Spatial Biodiversity Conditions — performed by C.2 Biodiversity Risk Map
+        <span class="lvlnote">click a box for its ICOMs, code module and requirements</span></div>
+      <div class="svgwrap" id="level2"></div>
+    </div>
+    <div class="lvl l3">
+      <div class="lvlhead"><span class="tag">Level 3</span> F.2.3 Calculate Habitat Quality — performed by C.2.3 Habitat Modeling Subsystem</div>
+      <div class="l3grid">
+        <div class="svgwrap" id="level3"></div>
+        <div class="runpanel">
+          <h3>Run F.2.3 live</h3>
+          <p class="hint">Input <b>Prepared datasets</b> (from F.2.2). Control <b>Habitat-model parameters</b> (from F.4 IT Development Team). Changing a control produces a new parameter-set ID (HMS-2.1.6).</p>
+          <div class="sliders" id="sliders"></div>
+          <label class="check"><input type="checkbox" id="fault"> Inject a transient fault (shows QA → Re-run request loop)</label>
+          <label class="check"><input type="checkbox" id="slow" checked> Step slowly (for the demo)</label>
+          <div class="btnrow"><button class="btn" id="runModel">▶ Run F.2.3</button><button class="btn ghost" id="resetParams">Reset controls</button></div>
+          <ol class="steplog" id="stepLog"></ol>
+          <div id="runVerdict"></div>
+        </div>
+      </div>
+    </div>
+    <div class="lvl">
+      <div class="lvlhead"><span class="tag">Hierarchies</span> Function hierarchy and asset hierarchy (same numbering as Innoslate bio2)</div>
+      <div class="hier" id="hier"></div>
+    </div>
+  </section>
+
+  <!-- ============ DATA & QA ============ -->
+  <section id="view-data" class="view dataview">
+    <div class="grid2">
+      <div class="card">
+        <div class="fhead"><span class="fid">F.2.1</span> Acquire Environmental Data <span class="mech">C.2.1 Data Ingestion</span></div>
+        <p class="hint">Control: <a href="data/config/approved_source_list.json" target="_blank">Approved source list</a> (from F.3 Government Agencies)</p>
+        <div id="sources"></div>
+      </div>
+      <div class="card">
+        <div class="fhead"><span class="fid">F.2.2</span> Validate and Prepare Data <span class="mech">C.2.2 Data Preparation</span></div>
+        <p class="hint">Control: <a href="data/config/data_quality_criteria.json" target="_blank">Data-quality criteria</a> (from F.4 IT Development Team)</p>
+        <div id="dq"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="fhead"><span class="fid ctl">Controls</span> Every control arrow on the F.2 IDEF0 is a versioned file in <code>config/</code></div>
+      <div id="controls"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="trace" id="trace">
+  <span class="tlabel">Executed IDEF0 functions</span>
+  <div id="traceChips" class="chips"></div>
+  <span class="ttime" id="traceTime"></span>
+</footer>
+
+<div id="drawer" class="drawer" hidden>
+  <button class="x" id="drawerClose" aria-label="Close">×</button>
+  <div id="drawerBody"></div>
+</div>
+<dialog id="reportDialog"><form method="dialog"><button class="x">×</button></form><pre id="reportText"></pre></dialog>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="brm-engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

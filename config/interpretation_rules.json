@@ -1,0 +1,10 @@
+{
+  "_idef0": "Control for F.2.6 Explain Results and Limitations. Owner: F.3 Review Environmental Screening Evidence (C.3 Government Agencies).",
+  "version": "IR-2026.11",
+  "disclaimer": "Preliminary ecological screening only. This result is not a regulatory determination under any state or federal law and does not replace field surveys or agency review.",
+  "limitations": [
+    "Threat weights, reach distances, habitat suitability and sensitivity are prototype values; ecologists still need to calibrate them.",
+    "Species records come from public observations and are incomplete for rare or rarely surveyed species.",
+    "Each result describes a whole 1 km \u00d7 1 km grid cell; conditions can differ within a parcel."
+  ]
+}

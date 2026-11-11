@@ -1,97 +1,62 @@
-# Biodiversity Risk Map
+# Biodiversity Risk Map (BRM)
 
-A complete SYSEN 5151 MVP for screening biodiversity risk across Tompkins County, New York. The repository contains a browser-based decision dashboard, the Stanford Natural Capital Project InVEST Habitat Quality equations, scripts for accessing public data, and demonstration data that make the interface usable immediately.
+SYSEN 5151 · Team Pending · Tompkins County, NY prototype.
 
-## What the application does
+The product implements IDEF0 function **F.2 Assess Spatial Biodiversity Conditions** (mechanism **C.2 Biodiversity Risk Map**) from the Innoslate model *bio2*, with **all three IDEF0 levels visible in the running app and in the code**:
 
-- Displays scored geographic cells on an interactive Leaflet map.
-- Filters cells by risk level and dominant habitat.
-- Shows each score's four component indicators.
-- Adjusts the priority threshold and exports priority cells to CSV.
-- Clearly labels the included data as a prototype and explains appropriate use.
+| IDEF0 level | Innoslate diagram | In the product | In the code |
+|---|---|---|---|
+| Level 1 | Metafunction (F.1–F.5) | Home page: five buttons. Each opens a working page (screen a project, set conservation priorities, review evidence, maintain the system, open the map system) | `brm/service.py` (F.2) + `config/*` (one file per control arrow) |
+| Level 2 | F.2 → F.2.1 … F.2.7 | *Assess Spatial Biodiversity Conditions* page: seven buttons; each step runs on its own page | `brm/f2_1_…py` … `brm/f2_7_…py` |
+| Level 3 | F.2.3 → F.2.3.1 … F.2.3.6 | *Calculate Habitat Quality* page: six step buttons, run one at a time (with the quality-check re-run loop) or all at once | `brm/habitat_modeling/f2_3_1_…py` … `f2_3_6_…py` |
 
-## Run the included demonstration
-
-Because browsers block local `fetch()` calls from `file://` pages, serve the project directory:
+## Run it
 
 ```bash
-cd dist
-python3 -m http.server 8000
+python3 scripts/make_raw_demo_data.py    # Environmental datasets (deterministic demo data) -> data/raw/
+python3 scripts/run_pipeline.py          # F.2 batch run -> dist/data/ (prints RUN-/DS-/PS- identifiers)
+cd dist && python3 -m http.server 8000   # open http://localhost:8000
 ```
 
-Then open `http://localhost:8000`.
-
-## Build a map from public data
-
-Create and activate a Python environment, then install dependencies:
+No third-party Python packages are needed for the engine; tests need only `pytest` (`pip install -r requirements-test.txt`).
+Leaflet is vendored in `dist/vendor/leaflet`, so the app works offline (basemap tiles need internet; the risk grid does not).
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+python3 -m pytest tests/test_functional_requirements.py -v   # tests named by requirement ID
 ```
 
-Download the county boundary and up to 5,000 GBIF occurrences:
+## Screening only the selected site
 
-```bash
-python scripts/download_boundary.py
-python scripts/download_gbif.py
+*Screen a project* (F.5) runs the habitat model **only on the plots the planner selects** (e.g. 4 of 168 cells), using the same approved parameter set as a county run, so each plot gets exactly the same score it would get in a full run. If the county has already been scored, the screening pages reuse that run and calculate nothing. The page states which of the two happened and the run ID.
+
+## Repository map (codebase → model)
+
+| Path | What it is |
+|---|---|
+| `model/idef0.json` | The three IDEF0 levels, hierarchies and requirements exported from Innoslate bio2 |
+| `brm/idef0.py` | `@idef0(...)` decorator: binds each Python function to its IDEF0 box (ID, mechanism, ICOMs, requirements) and records a run trace |
+| `brm/service.py` | F.2 orchestrator — call order = arrows on the F.2 IDEF0 |
+| `brm/habitat_modeling/` | F.2.3 and its six Level-3 component modules |
+| `config/` | Every control arrow of F.2 as a versioned file, with its Level-1 owner |
+| `dist/brm-engine.js` | Browser port of F.2.3.x, F.2.4, F.2.6, F.2.7 (same hashes → same run IDs as Python) |
+| `dist/app.js` | Web app (C.2.5): routes in `docs/route-table.md` |
+| `docs/traceability.md` | Function ID → module → requirement ID → test name |
+| `docs/route-table.md` | Product entry point → use case → IDEF0 functions (Lab Manual Ch 6) |
+| `contracts/api-v1.yaml` | OpenAPI contract, one operation per F.2.3.x box, one schema per internal arrow (Lab Manual Ch 7) |
+| `tests/test_functional_requirements.py` | Tests named `test_SYS_…` / `test_HMS_…` after Innoslate requirement IDs |
+| `.github/workflows/tests.yml` | CI: regenerate data, run pipeline, run tests (Python 3.10 + 3.12, Node for the JS parity test) |
+| `docs/user-guide-screening.md` | How to screen a site: what to provide, how to operate, the standards used and where results appear |
+| `docs/demo-video-script.md` | 10-minute demo video script mapped to the Canvas rubric and the peer-review worksheet |
+| `legacy/` | Earlier stubs and README kept for reference (`legacy/README_v1.md` describes the original public-data GIS pipeline in `scripts/build_risk_grid.py`) |
+
+## Habitat quality model (F.2.3.3)
+
+InVEST Habitat Quality (pinned release in `config/habitat_model_parameters.json`):
+
+```
+i_rxy = 1 − d/d_max  (linear)  or  exp(−2.99·d/d_max)  (exponential)
+D_xj  = β_x · Σ_r (w_r / Σw) · i_rxy · S_jr
+Q_xj  = H_j · (1 − D^z / (D^z + k^z))          risk = 1 − Q   → five classes (F.2.3.5)
 ```
 
-Optional layers may be placed at these paths:
-
-- `data/raw/protected_areas.geojson`: PAD-US polygons clipped to Tompkins County.
-- `data/raw/roads.geojson`: OpenStreetMap road lines.
-- `data/raw/land_cover.tif`: a USGS Annual NLCD GeoTIFF.
-
-Build the scored GeoJSON used by the dashboard:
-
-```bash
-python scripts/build_risk_grid.py
-```
-
-Refresh the browser. The app loads `dist/data/risk_grid.geojson`, so no JavaScript change is required.
-
-## InVEST Habitat Quality model
-
-The project uses the authoritative InVEST Habitat Quality equation:
-
-```text
-Q_xj = H_j × [1 − D_xj^z / (D_xj^z + k^z)]
-Risk_xj = 1 − Q_xj
-```
-
-The prototype uses InVEST's fixed `z = 2.5` and a documented prototype value `k = 0.5` because degradation is normalized. Threat weights, maximum distances, habitat suitability, sensitivity, and `k` require literature or expert calibration before decision use. GBIF species records are retained for validation and context rather than inserted into the standard equation.
-
-Source: [Natural Capital Project InVEST Habitat Quality documentation](https://storage.googleapis.com/releases.naturalcapitalproject.org/invest-userguide/latest/en/habitat_quality.html). The output is a screening score—not a prediction of species loss or a substitute for field assessment.
-
-## Data sources
-
-- Species observations: GBIF Occurrence API
-- County boundary: U.S. Census TIGER/Line
-- Land cover: USGS Annual NLCD (manual GeoTIFF download)
-- Protected areas: USGS PAD-US (manual state download and conversion)
-- Roads: OpenStreetMap
-
-Review each source's license, citation guidance, coordinate quality, temporal coverage, and sampling limitations before presenting results.
-
-## Project structure
-
-```text
-dist/                       deployable web application
-  index.html
-  styles.css
-  app.js
-  data/risk_grid.geojson
-scripts/
-  download_boundary.py
-  download_gbif.py
-  build_risk_grid.py
-  make_demo_data.py
-tests/test_scoring.py
-requirements.txt
-```
-
-## Suggested next improvement
-
-Implement NLCD zonal statistics for habitat condition and land-cover change. Keep the raw class percentages visible so users can understand why an area received its score.
+All weights, distances, suitability and sensitivity values are prototype values for demonstration and need expert calibration. Results are preliminary ecological screening only, not regulatory determinations.

@@ -1,0 +1,29 @@
+{
+ "source_id": "SCRAPED-BLOG-LAYER",
+ "title": "Unvetted layer copied from a blog (not approved)",
+ "crs": "EPSG:26918",
+ "retrieved": "2026-10-15",
+ "license": "unknown",
+ "records": [
+  {
+   "cell_id": "R01-C01",
+   "value": 1
+  },
+  {
+   "cell_id": "R01-C02",
+   "value": 1
+  },
+  {
+   "cell_id": "R01-C03",
+   "value": 1
+  },
+  {
+   "cell_id": "R01-C04",
+   "value": 1
+  },
+  {
+   "cell_id": "R01-C05",
+   "value": 1
+  }
+ ]
+}

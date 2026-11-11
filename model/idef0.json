@@ -1,0 +1,599 @@
+{
+  "_source": "Exported by hand from Innoslate project bio2 (cloud.innoslate.com/cornell/p/913). Level 1 = Metafunction IDEF0, Level 2 = F.2 IDEF0, Level 3 = F.2.3 IDEF0.",
+  "project": "Biodiversity Risk Map (bio2)",
+  "level1": {
+    "diagram": "Metafunction",
+    "selected": "F.2",
+    "functions": [
+      {
+        "id": "F.1",
+        "name": "Identify Conservation Priorities",
+        "mechanism": "C.1 Conservation Organizations",
+        "inputs": [
+          "Habitat-quality map"
+        ],
+        "outputs": [
+          "Conservation priorities"
+        ]
+      },
+      {
+        "id": "F.2",
+        "name": "Assess Spatial Biodiversity Conditions",
+        "mechanism": "C.2 Biodiversity Risk Map",
+        "inputs": [
+          "Environmental datasets",
+          "Planning area and data needs",
+          "Map request",
+          "Review request"
+        ],
+        "controls": [
+          "Approved source list",
+          "Data-quality criteria",
+          "Habitat-model parameters",
+          "Site selection",
+          "Site-summary rules",
+          "Map-display rules",
+          "Interpretation rules",
+          "Report template"
+        ],
+        "outputs": [
+          "Displayed risk map and legend",
+          "Habitat-quality map",
+          "Site screening summary",
+          "Factor explanations and limitations",
+          "Screening report"
+        ]
+      },
+      {
+        "id": "F.3",
+        "name": "Review Environmental Screening Evidence",
+        "mechanism": "C.3 Government Agencies",
+        "inputs": [
+          "Factor explanations and limitations"
+        ],
+        "outputs": [
+          "Approved source list",
+          "Interpretation rules",
+          "Report template",
+          "Review request"
+        ]
+      },
+      {
+        "id": "F.4",
+        "name": "Maintain Biodiversity Risk Map",
+        "mechanism": "C.4 IT Development Team",
+        "inputs": [
+          "Environmental datasets"
+        ],
+        "outputs": [
+          "Data-quality criteria",
+          "Habitat-model parameters",
+          "Map-display rules"
+        ]
+      },
+      {
+        "id": "F.5",
+        "name": "Screen Proposed Development Sites",
+        "mechanism": "C.5 Local Planner",
+        "inputs": [
+          "Screening report",
+          "Displayed risk map and legend"
+        ],
+        "outputs": [
+          "Planning area and data needs",
+          "Site selection",
+          "Site-summary rules",
+          "Map request"
+        ]
+      }
+    ]
+  },
+  "level2": {
+    "parent": "F.2",
+    "functions": [
+      {
+        "id": "F.2.1",
+        "name": "Acquire Environmental Data",
+        "mechanism": "C.2.1 Data Ingestion Subsystem",
+        "inputs": [
+          "Environmental datasets",
+          "Planning area and data needs"
+        ],
+        "controls": [
+          "Approved source list"
+        ],
+        "outputs": [
+          "Acquired datasets and metadata",
+          "Dataset identifier"
+        ]
+      },
+      {
+        "id": "F.2.2",
+        "name": "Validate and Prepare Data",
+        "mechanism": "C.2.2 Data Preparation Subsystem",
+        "inputs": [
+          "Acquired datasets and metadata"
+        ],
+        "controls": [
+          "Data-quality criteria"
+        ],
+        "outputs": [
+          "Prepared datasets",
+          "Data-quality report",
+          "Coverage Validation Result"
+        ]
+      },
+      {
+        "id": "F.2.3",
+        "name": "Calculate Habitat Quality",
+        "mechanism": "C.2.3 Habitat Modeling Subsystem",
+        "inputs": [
+          "Prepared datasets"
+        ],
+        "controls": [
+          "Habitat-model parameters"
+        ],
+        "outputs": [
+          "Habitat-quality and degradation results",
+          "Model run record"
+        ]
+      },
+      {
+        "id": "F.2.4",
+        "name": "Summarize Site Conditions",
+        "mechanism": "C.2.4 Spatial Analysis Subsystem",
+        "inputs": [
+          "Prepared datasets",
+          "Habitat-quality and degradation results",
+          "Planning area and layer selection"
+        ],
+        "controls": [
+          "Site selection",
+          "Site-summary rules"
+        ],
+        "outputs": [
+          "Site screening summary"
+        ]
+      },
+      {
+        "id": "F.2.5",
+        "name": "Display Geographic Results",
+        "mechanism": "C.2.5 Web Map Subsystem",
+        "inputs": [
+          "Prepared datasets",
+          "Habitat-quality and degradation results",
+          "Site screening summary",
+          "Area and layer selection",
+          "Map request"
+        ],
+        "controls": [
+          "Map-display rules"
+        ],
+        "outputs": [
+          "Displayed risk map and legend",
+          "Habitat-quality map"
+        ]
+      },
+      {
+        "id": "F.2.6",
+        "name": "Explain Results and Limitations",
+        "mechanism": "C.2.6 Explanation Subsystem",
+        "inputs": [
+          "Site screening summary",
+          "Data-quality report",
+          "Model run record"
+        ],
+        "controls": [
+          "Interpretation rules",
+          "Review request"
+        ],
+        "outputs": [
+          "Factor explanations and limitations"
+        ]
+      },
+      {
+        "id": "F.2.7",
+        "name": "Export Screening Reports",
+        "mechanism": "C.2.7 Report Generation Subsystem",
+        "inputs": [
+          "Site screening summary",
+          "Factor explanations and limitations"
+        ],
+        "controls": [
+          "Report template"
+        ],
+        "outputs": [
+          "Screening report"
+        ]
+      }
+    ]
+  },
+  "level3": {
+    "parent": "F.2.3",
+    "functions": [
+      {
+        "id": "F.2.3.1",
+        "name": "Assemble Model Inputs",
+        "mechanism": "C.2.3.1 Model Input Builder",
+        "inputs": [
+          "Prepared datasets"
+        ],
+        "controls": [],
+        "outputs": [
+          "Model input bundle",
+          "Threat-layer inventory"
+        ]
+      },
+      {
+        "id": "F.2.3.2",
+        "name": "Configure Threat and Sensitivity Parameters",
+        "mechanism": "C.2.3.2 Parameter Configuration Manager",
+        "inputs": [
+          "Threat-layer inventory"
+        ],
+        "controls": [
+          "Habitat-model parameters"
+        ],
+        "outputs": [
+          "Approved parameter set"
+        ]
+      },
+      {
+        "id": "F.2.3.3",
+        "name": "Execute Habitat Quality Model",
+        "mechanism": "C.2.3.3 InVEST Habitat Quality Engine",
+        "inputs": [
+          "Model input bundle",
+          "Re-run request"
+        ],
+        "controls": [
+          "Approved parameter set"
+        ],
+        "outputs": [
+          "Raw model outputs",
+          "Run log"
+        ]
+      },
+      {
+        "id": "F.2.3.4",
+        "name": "Verify Model Outputs",
+        "mechanism": "C.2.3.4 Output QA Checker",
+        "inputs": [
+          "Raw model outputs"
+        ],
+        "controls": [],
+        "outputs": [
+          "Verified habitat rasters",
+          "QA result",
+          "Re-run request"
+        ]
+      },
+      {
+        "id": "F.2.3.5",
+        "name": "Classify Habitat Risk",
+        "mechanism": "C.2.3.5 Risk Classifier",
+        "inputs": [
+          "Verified habitat rasters"
+        ],
+        "controls": [],
+        "outputs": [
+          "Habitat-quality and degradation results"
+        ]
+      },
+      {
+        "id": "F.2.3.6",
+        "name": "Register Model Run",
+        "mechanism": "C.2.3.6 Model Run Registry",
+        "inputs": [
+          "Run log",
+          "QA result"
+        ],
+        "controls": [],
+        "outputs": [
+          "Model run record"
+        ]
+      }
+    ]
+  },
+  "function_hierarchy": {
+    "F.2": [
+      "F.2.1",
+      "F.2.2",
+      "F.2.3",
+      "F.2.4",
+      "F.2.5",
+      "F.2.6",
+      "F.2.7"
+    ],
+    "F.2.3": [
+      "F.2.3.1",
+      "F.2.3.2",
+      "F.2.3.3",
+      "F.2.3.4",
+      "F.2.3.5",
+      "F.2.3.6"
+    ],
+    "F.1": [
+      "F.1.1",
+      "F.1.2",
+      "F.1.3",
+      "F.1.4"
+    ],
+    "F.3": [
+      "F.3.1",
+      "F.3.2",
+      "F.3.3",
+      "F.3.4"
+    ],
+    "F.4": [
+      "F.4.1",
+      "F.4.2",
+      "F.4.3",
+      "F.4.4",
+      "F.4.5"
+    ],
+    "F.5": [
+      "F.5.1",
+      "F.5.2",
+      "F.5.3",
+      "F.5.4"
+    ]
+  },
+  "asset_hierarchy": {
+    "Biodiversity Risk Map (Universe)": [
+      "C.1 Conservation Organizations",
+      "C.2 Biodiversity Risk Map",
+      "C.3 Government Agencies",
+      "C.4 IT Development Team",
+      "C.5 Local Planner"
+    ],
+    "C.2 Biodiversity Risk Map": [
+      "C.2.1 Data Ingestion Subsystem",
+      "C.2.2 Data Preparation Subsystem",
+      "C.2.3 Habitat Modeling Subsystem",
+      "C.2.4 Spatial Analysis Subsystem",
+      "C.2.5 Web Map Subsystem",
+      "C.2.6 Explanation Subsystem",
+      "C.2.7 Report Generation Subsystem"
+    ],
+    "C.2.3 Habitat Modeling Subsystem": [
+      "C.2.3.1 Model Input Builder",
+      "C.2.3.2 Parameter Configuration Manager",
+      "C.2.3.3 InVEST Habitat Quality Engine",
+      "C.2.3.4 Output QA Checker",
+      "C.2.3.5 Risk Classifier",
+      "C.2.3.6 Model Run Registry"
+    ]
+  },
+  "requirements": {
+    "SYS-1.4.3": {
+      "doc": "Biodiversity Risk Map Requirements",
+      "type": "Functional (Ch 5)",
+      "text": "The Biodiversity Risk Map shall Calculate Habitat Quality."
+    },
+    "SYS-2.1.2": {
+      "doc": "Biodiversity Risk Map Requirements",
+      "type": "System-wide (Performance)",
+      "text": "The Biodiversity Risk Map shall return a site result within 3 s (95th percentile) for 10 concurrent users."
+    },
+    "SYS-2.1.4": {
+      "doc": "Biodiversity Risk Map Requirements",
+      "type": "System-wide (Performance)",
+      "text": "The Biodiversity Risk Map shall produce reproducible results for identical inputs and parameters."
+    },
+    "SYS-2.1.5": {
+      "doc": "Biodiversity Risk Map Requirements",
+      "type": "System-wide",
+      "text": "The Biodiversity Risk Map shall warn the user when a selected area has data gaps."
+    },
+    "SYS-2.4.5": {
+      "doc": "Biodiversity Risk Map Requirements",
+      "type": "System-wide (Interface)",
+      "text": "The Biodiversity Risk Map shall trace every output to its data version and parameter set."
+    },
+    "HMS-1.1.1": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Input",
+      "text": "The Habitat Modeling Subsystem shall accept Habitat-model parameters from the IT Development Team."
+    },
+    "HMS-1.1.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Input",
+      "text": "The Habitat Modeling Subsystem shall accept Prepared datasets from the Data Preparation Subsystem."
+    },
+    "HMS-1.2.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Output",
+      "text": "The Habitat Modeling Subsystem shall provide Habitat-quality and degradation results to the Spatial Analysis Subsystem."
+    },
+    "HMS-1.2.3": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Output",
+      "text": "The Habitat Modeling Subsystem shall provide the Model run record to the Explanation Subsystem."
+    },
+    "HMS-1.3.1": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Interface",
+      "text": "Interface with the Data Preparation Subsystem."
+    },
+    "HMS-1.3.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Interface",
+      "text": "Interface with the Spatial Analysis Subsystem."
+    },
+    "HMS-1.3.3": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Interface",
+      "text": "Interface with the Web Map Subsystem."
+    },
+    "HMS-1.3.4": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Interface",
+      "text": "Interface with the Explanation Subsystem."
+    },
+    "HMS-1.4.1": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Assemble Model Inputs."
+    },
+    "HMS-1.4.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Configure Threat and Sensitivity Parameters."
+    },
+    "HMS-1.4.3": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Execute Habitat Quality Model."
+    },
+    "HMS-1.4.4": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Verify Model Outputs."
+    },
+    "HMS-1.4.5": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Classify Habitat Risk."
+    },
+    "HMS-1.4.6": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "Functional",
+      "text": "The Habitat Modeling Subsystem shall Register Model Run."
+    },
+    "HMS-2.1.1": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.1.2",
+      "method": "Apportionment",
+      "text": "The Habitat Modeling Subsystem shall run off the user request path so that site requests read precomputed results (3 s budget: 1.5 s Spatial Analysis, 0.3 s Explanation, 1.2 s Web Map, 0 s Habitat Modeling)."
+    },
+    "HMS-2.1.3": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.1.4",
+      "method": "Equivalence",
+      "text": "The Habitat Modeling Subsystem shall produce habitat-quality values that differ by no more than 1e-6 between runs with the same inputs and parameter set."
+    },
+    "HMS-2.1.4": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.1.1",
+      "method": "Equivalence",
+      "text": "The Habitat Modeling Subsystem shall produce a result for every cell of the county grid."
+    },
+    "HMS-2.1.5": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.4.5",
+      "method": "Synthesis",
+      "text": "The Habitat Modeling Subsystem shall release no result that fails the output quality gate (values in [0,1], no missing cells)."
+    },
+    "HMS-2.1.6": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.1.7",
+      "method": "Equivalence",
+      "text": "Only the IT Development Team shall change habitat-model parameters; every change produces a new parameter-set identifier."
+    },
+    "HMS-2.3.1": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.3.1",
+      "method": "Equivalence",
+      "text": "The Habitat Modeling Subsystem shall use a pinned InVEST Habitat Quality release."
+    },
+    "HMS-2.3.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.3.2",
+      "method": "Synthesis",
+      "text": "Threat weights, distances, suitability and sensitivity shall be configuration, not code."
+    },
+    "HMS-2.4.2": {
+      "doc": "Habitat Modeling Subsystem Requirements",
+      "type": "System-wide (flow-down)",
+      "parent": "SYS-2.4.5",
+      "method": "Synthesis",
+      "text": "Every model run shall produce a Model run record (run id, dataset id, parameter-set id, model version, QA result)."
+    }
+  },
+  "level2_actors": {
+    "F.1": [
+      {
+        "id": "F.1.1",
+        "name": "Select Area and Risk filters"
+      },
+      {
+        "id": "F.1.2",
+        "name": "Inspect Cell Risk Detail"
+      },
+      {
+        "id": "F.1.3",
+        "name": "Request Evidence"
+      },
+      {
+        "id": "F.1.4",
+        "name": "Request Priority Area Export"
+      }
+    ],
+    "F.3": [
+      {
+        "id": "F.3.1",
+        "name": "Validate Dataset Coverage"
+      },
+      {
+        "id": "F.3.2",
+        "name": "Approve Data and Limitations"
+      },
+      {
+        "id": "F.3.3",
+        "name": "Present Method and Evidence"
+      },
+      {
+        "id": "F.3.4",
+        "name": "Record Planner Decision"
+      }
+    ],
+    "F.4": [
+      {
+        "id": "F.4.1",
+        "name": "Acquire Source Data"
+      },
+      {
+        "id": "F.4.2",
+        "name": "Build Study Grid"
+      },
+      {
+        "id": "F.4.3",
+        "name": "Calculate Risk Scores"
+      },
+      {
+        "id": "F.4.4",
+        "name": "Publish Risk Dataset"
+      },
+      {
+        "id": "F.4.5",
+        "name": "Package and Deliver Export File"
+      }
+    ],
+    "F.5": [
+      {
+        "id": "F.5.1",
+        "name": "Locate Site"
+      },
+      {
+        "id": "F.5.2",
+        "name": "Overlay Site on Risk Map"
+      },
+      {
+        "id": "F.5.3",
+        "name": "Summarize Site Risk"
+      },
+      {
+        "id": "F.5.4",
+        "name": "Request Planning Data Download"
+      }
+    ]
+  }
+}

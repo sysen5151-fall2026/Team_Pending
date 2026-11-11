@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Biodiversity Risk Map · Tompkins County</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 22c5-9 9-13 12-13s4 4 7 4 4-3 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 27c6-5 10-7 13-7s5 2 11 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/></svg>
+      <span>Biodiversity Risk Map</span>
+    </a>
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+    <div class="status" id="status"></div>
+  </header>
+  <main id="app" tabindex="-1"><p class="loading">Loading…</p></main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="brm-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

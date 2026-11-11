@@ -1,0 +1,85 @@
+{
+ "site_selection": {
+  "name": "Proposed Route 13 commercial site",
+  "cell_ids": [
+   "R05-C08",
+   "R05-C09",
+   "R06-C08",
+   "R06-C09"
+  ]
+ },
+ "site_screening_summary": {
+  "site_name": "Proposed Route 13 commercial site",
+  "cell_ids": [
+   "R05-C08",
+   "R05-C09",
+   "R06-C08",
+   "R06-C09"
+  ],
+  "layer": "risk",
+  "cell_count": 4,
+  "mean_risk": 0.6309,
+  "risk_class": "High",
+  "max_cell": "R06-C08",
+  "max_risk": 0.774589,
+  "cells_over_threshold": 2,
+  "mean_habitat_quality": 0.3691,
+  "mean_degradation": 0.3155,
+  "mean_threat_impact": {
+   "agriculture": 0.8895,
+   "road": 0.0717,
+   "urban": 0.6268
+  },
+  "land_cover": [
+   "Mixed habitat",
+   "Wetland"
+  ],
+  "species_count": 157,
+  "data_gap_cells": [],
+  "recommendation": "Recommend a targeted habitat survey and further environmental review.",
+  "run_id": "RUN-0dbc506b",
+  "parameter_set_id": "PS-8eae4472",
+  "rules_version": "SSR-2026.10"
+ },
+ "factor_explanations_and_limitations": {
+  "factors": [
+   "Average habitat quality is 0.37 on a 0-1 scale (1 = intact habitat) and average degradation is 0.32 (0 = no threat pressure), across 4 cell(s) of mixed habitat, wetland.",
+   "Farmland pressure: 0.89 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach).",
+   "Development pressure: 0.63 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach).",
+   "Road pressure: 0.07 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach)."
+  ],
+  "limitations": [
+   "Threat weights, reach distances, habitat suitability and sensitivity are prototype values; ecologists still need to calibrate them.",
+   "Species records come from public observations and are incomplete for rare or rarely surveyed species.",
+   "Each result describes a whole 1 km \u00d7 1 km grid cell; conditions can differ within a parcel."
+  ],
+  "disclaimer": "Preliminary ecological screening only. This result is not a regulatory determination under any state or federal law and does not replace field surveys or agency review.",
+  "provenance": {
+   "run_id": "RUN-0dbc506b",
+   "dataset_id": "DS-ca568a93",
+   "parameter_set_id": "PS-8eae4472",
+   "engine": "InVEST Habitat Quality 3.14.2",
+   "qa": "PASS"
+  },
+  "sources": [
+   "GBIF species occurrence counts",
+   "NLCD cultivated classes, distance raster",
+   "NLCD developed classes, distance raster",
+   "OpenStreetMap roads, distance raster",
+   "U.S. Census TIGER county boundary, gridded",
+   "NLCD 2021 land cover, reclassified",
+   "Protected Areas Database of the U.S."
+  ],
+  "review_request": null,
+  "rules_version": "IR-2026.11"
+ },
+ "screening_report": {
+  "markdown": "# Biodiversity Screening Report \u2014 Proposed Route 13 commercial site\n\n**Generated:** 2026-11-01\n\n## Result\n- Grid cells screened (1 km \u00d7 1 km each): 4\n- Average risk score: 0.63 on a 0-1 scale, class **High**\n- Highest-risk cell: R06-C08, score 0.77\n- Species-record coverage: complete\n- Recommendation: Recommend a targeted habitat survey and further environmental review.\n\n## How to read the score\n- Risk score = 1 \u2212 habitat quality. 0 means intact, unthreatened habitat; 1 means habitat that is poor or heavily degraded.\n- Classes: Very high \u2265 0.80, High 0.60\u20130.79, Moderate 0.40\u20130.59, Low 0.20\u20130.39, Very low < 0.20.\n- Cell names give the grid position: R05-C08 is row 5 counted from the south edge of the county, column 8 counted from the west edge.\n\n## Contributing factors\n- Average habitat quality is 0.37 on a 0-1 scale (1 = intact habitat) and average degradation is 0.32 (0 = no threat pressure), across 4 cell(s) of mixed habitat, wetland.\n- Farmland pressure: 0.89 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach).\n- Development pressure: 0.63 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach).\n- Road pressure: 0.07 on a 0-1 scale (1 = the threat is right at the cell, 0 = out of reach).\n\n## Data sources\n- GBIF species occurrence counts\n- NLCD cultivated classes, distance raster\n- NLCD developed classes, distance raster\n- OpenStreetMap roads, distance raster\n- U.S. Census TIGER county boundary, gridded\n- NLCD 2021 land cover, reclassified\n- Protected Areas Database of the U.S.\n\n## Limitations\n- Threat weights, reach distances, habitat suitability and sensitivity are prototype values; ecologists still need to calibrate them.\n- Species records come from public observations and are incomplete for rare or rarely surveyed species.\n- Each result describes a whole 1 km \u00d7 1 km grid cell; conditions can differ within a parcel.\n\n## Traceability\n- Model run ID: RUN-0dbc506b\n- Settings version: PS-8eae4472\n- These codes are fingerprints of the exact data and model settings used. Re-running with the same data and settings gives the same codes and the same result.\n\n> Preliminary ecological screening only. This result is not a regulatory determination under any state or federal law and does not replace field surveys or agency review.\n",
+  "csv": "cell_id,site,mean_risk,risk_class,run_id,parameter_set_id\nR05-C08,Proposed Route 13 commercial site,0.6309,High,RUN-0dbc506b,PS-8eae4472\nR05-C09,Proposed Route 13 commercial site,0.6309,High,RUN-0dbc506b,PS-8eae4472\nR06-C08,Proposed Route 13 commercial site,0.6309,High,RUN-0dbc506b,PS-8eae4472\nR06-C09,Proposed Route 13 commercial site,0.6309,High,RUN-0dbc506b,PS-8eae4472",
+  "formats": [
+   "md",
+   "csv"
+  ],
+  "run_id": "RUN-0dbc506b"
+ }
+}
