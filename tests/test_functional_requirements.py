@@ -282,7 +282,7 @@ def test_IDEF0_code_matches_innoslate_model():
 
 
 def test_traceability_doc_covers_every_function_and_test():
-    doc = (ROOT / "docs" / "traceability.md").read_text()
+    doc = (ROOT / "traceability.md").read_text()
     names = {n for n in globals() if n.startswith("test_")}
     for fid in list(REGISTRY):
         assert f"| {fid} " in doc, fid
@@ -291,7 +291,7 @@ def test_traceability_doc_covers_every_function_and_test():
 
 
 def test_contract_covers_f23_internal_flows():
-    y = (ROOT / "contracts" / "api-v1.yaml").read_text()
+    y = (ROOT / "api-v1.yaml").read_text()
     for fid in ("F.2.3.1", "F.2.3.2", "F.2.3.3", "F.2.3.4", "F.2.3.5", "F.2.3.6"):
         assert f"x-idef0-function: {fid}" in y
     for flow in ("Model input bundle", "Threat-layer inventory", "Approved parameter set", "Raw model outputs",
