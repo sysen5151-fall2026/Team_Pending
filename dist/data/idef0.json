@@ -825,6 +825,33 @@
    "path": "brm/f2_4_spatial_analysis.py",
    "callable": "summarize_site_conditions"
   },
+  "F.2.5": {
+   "function_id": "F.2.5",
+   "name": "Display Geographic Results",
+   "mechanism": "C.2.5 Web Map Subsystem",
+   "inputs": [
+    "Prepared datasets",
+    "Habitat-quality and degradation results",
+    "Site screening summary",
+    "Area and layer selection",
+    "Map request"
+   ],
+   "controls": [
+    "Map-display rules"
+   ],
+   "outputs": [
+    "Displayed risk map and legend",
+    "Habitat-quality map"
+   ],
+   "requirements": [
+    "SYS-1.4.5",
+    "SYS-2.2.1",
+    "SYS-2.4.3"
+   ],
+   "module": "brm.f2_5_web_map",
+   "path": "brm/f2_5_web_map.py",
+   "callable": "display_geographic_results"
+  },
   "F.2.6": {
    "function_id": "F.2.6",
    "name": "Explain Results and Limitations",
@@ -874,33 +901,6 @@
    "module": "brm.f2_7_report_generation",
    "path": "brm/f2_7_report_generation.py",
    "callable": "export_screening_reports"
-  },
-  "F.2.5": {
-   "function_id": "F.2.5",
-   "name": "Display Geographic Results",
-   "mechanism": "C.2.5 Web Map Subsystem",
-   "inputs": [
-    "Prepared datasets",
-    "Habitat-quality and degradation results",
-    "Site screening summary",
-    "Area and layer selection",
-    "Map request"
-   ],
-   "controls": [
-    "Map-display rules"
-   ],
-   "outputs": [
-    "Displayed risk map and legend",
-    "Habitat-quality map"
-   ],
-   "requirements": [
-    "SYS-1.4.5",
-    "SYS-2.2.1",
-    "SYS-2.4.3"
-   ],
-   "module": "brm.f2_5_web_map",
-   "path": "brm/f2_5_web_map.py",
-   "callable": "display_geographic_results"
   },
   "F.2": {
    "function_id": "F.2",
@@ -959,7 +959,7 @@
     "Acquired datasets and metadata",
     "Dataset identifier"
    ],
-   "ms": 2.435
+   "ms": 13.764
   },
   {
    "function_id": "F.2.2",
@@ -976,7 +976,7 @@
     "Data-quality report",
     "Coverage Validation Result"
    ],
-   "ms": 0.341
+   "ms": 1.302
   },
   {
    "function_id": "F.2.3.1",
@@ -990,7 +990,7 @@
     "Model input bundle",
     "Threat-layer inventory"
    ],
-   "ms": 0.667
+   "ms": 3.396
   },
   {
    "function_id": "F.2.3.2",
@@ -1005,7 +1005,7 @@
    "outputs": [
     "Approved parameter set"
    ],
-   "ms": 0.056
+   "ms": 0.596
   },
   {
    "function_id": "F.2.3.3",
@@ -1022,7 +1022,7 @@
     "Raw model outputs",
     "Run log"
    ],
-   "ms": 0.623
+   "ms": 3.882
   },
   {
    "function_id": "F.2.3.4",
@@ -1037,7 +1037,7 @@
     "QA result",
     "Re-run request"
    ],
-   "ms": 0.045
+   "ms": 0.202
   },
   {
    "function_id": "F.2.3.6",
@@ -1051,7 +1051,7 @@
    "outputs": [
     "Model run record"
    ],
-   "ms": 0.018
+   "ms": 0.112
   },
   {
    "function_id": "F.2.3.5",
@@ -1064,7 +1064,7 @@
    "outputs": [
     "Habitat-quality and degradation results"
    ],
-   "ms": 0.222
+   "ms": 0.894
   },
   {
    "function_id": "F.2.3",
@@ -1080,7 +1080,7 @@
     "Habitat-quality and degradation results",
     "Model run record"
    ],
-   "ms": 1.658
+   "ms": 9.238
   },
   {
    "function_id": "F.2.4",
@@ -1098,7 +1098,7 @@
    "outputs": [
     "Site screening summary"
    ],
-   "ms": 0.047
+   "ms": 0.262
   },
   {
    "function_id": "F.2.5",
@@ -1118,7 +1118,7 @@
     "Displayed risk map and legend",
     "Habitat-quality map"
    ],
-   "ms": 0.246
+   "ms": 0.974
   },
   {
    "function_id": "F.2.6",
@@ -1136,7 +1136,7 @@
    "outputs": [
     "Factor explanations and limitations"
    ],
-   "ms": 0.013
+   "ms": 0.07
   },
   {
    "function_id": "F.2.7",
@@ -1152,7 +1152,7 @@
    "outputs": [
     "Screening report"
    ],
-   "ms": 0.03
+   "ms": 0.113
   },
   {
    "function_id": "F.2",
@@ -1181,7 +1181,7 @@
     "Factor explanations and limitations",
     "Screening report"
    ],
-   "ms": 4.793
+   "ms": 25.813
   }
  ]
 }

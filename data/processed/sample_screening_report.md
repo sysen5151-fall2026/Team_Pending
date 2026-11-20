@@ -32,7 +32,7 @@
 ## Limitations
 - Threat weights, reach distances, habitat suitability and sensitivity are prototype values; ecologists still need to calibrate them.
 - Species records come from public observations and are incomplete for rare or rarely surveyed species.
-- Each result describes a whole 1 km Ã— 1 km grid cell; conditions can differ within a parcel.
+- Each result describes a whole 1 km × 1 km grid cell; conditions can differ within a parcel.
 
 ## Traceability
 - Model run ID: RUN-0dbc506b
